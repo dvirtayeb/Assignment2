@@ -15,5 +15,6 @@ typedef struct {
 }Date;
 
 void addDate(int day, int month, int year);
+char* toString(Date* date);
 
 #endif /* DATE_H_ */

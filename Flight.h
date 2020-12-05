@@ -16,7 +16,10 @@ typedef struct {
 	Airport* destinationAirpot;
 	int departureTime;
 	Date* date;
-};
+}Flight;
+
+void isCurrectDestination(Flight* flight, char* code);
+Flight*
 
 
 #endif /* FLIGHT_H_ */
