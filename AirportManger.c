@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Airport* addAirport(AirportManger* pAirportManger)
+Airport* addAirport()
 {
 	Airport* newAirport = (Airport*)malloc(sizeof(Airport));
 	printf("Please enter a name: ");

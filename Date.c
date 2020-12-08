@@ -5,6 +5,4 @@
  *      Author: dvirtayeb
  */
 
-char* toString(Date* date){
-	scanf("%s",date->day);
-}
+
