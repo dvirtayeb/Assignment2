@@ -20,6 +20,6 @@ int isEqualAirports(Airport* pAirport1, Airport* pAriport2);
 int checkCodeIATA(Airport* pAirport,char* code);
 char* fixNameAirport(char* nameAirport);
 void changeDoubleSumOfLetters(char* word, int lenWord);
-void fixWord(char* word, char* nameAirport, int counter, char* textResult);
+void fixWord(char* word, char* nameAirport, int counter, char* textResult, int countWords);
 int counterwords(const char* nameAirport);
 #endif /* AIRPORT_H_ */

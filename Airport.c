@@ -34,8 +34,9 @@ char* fixNameAirport(char* nameAirport){
 	char* tempNameAirport = strdup(nameAirport);
 	char* word = NULL;
 	word = strtok(tempNameAirport,space);
+	int countWords = counterwords(nameAirport);
 	while(word != NULL){
-		fixWord(word, nameAirport, counter, textResult);
+		fixWord(word, nameAirport, counter, textResult, countWords);
 		if(islower(*word))
 			break;
 		word = strtok(NULL,space);
@@ -47,11 +48,10 @@ char* fixNameAirport(char* nameAirport){
 	return nameAirport;
 }
 
-void fixWord(char* word, char* tempNameAirport, int counter, char* textResult){
+void fixWord(char* word, char* tempNameAirport, int counter, char* textResult, int countWords){
 	*word = toupper(*word); // term 1
 	char* tempWord = strdup(word);
 	int length = strlen(tempWord);
-	int countWords = counterwords(tempNameAirport);
 	if(counter == countWords)
 			length = length-1;
 	int isEvenAmountWord = (length) % 2;
