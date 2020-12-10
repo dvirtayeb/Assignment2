@@ -15,7 +15,7 @@ int main(){
 	printf("choose name:");
 	fgets(newAirport->nameAirport, 255, stdin);
 	newAirport->nameAirport = fixNameAirport(newAirport->nameAirport);
-	printf("%s", newAirport->nameAirport);
+	puts(newAirport->nameAirport);
 	free(newAirport);
 
 	return 0;
