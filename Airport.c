@@ -29,12 +29,12 @@ int checkCodeIATA(Airport* pAirport,char* code)
 char* fixNameAirport(char* nameAirport){
 	const char* space = " ";
 	int lenName = strlen(nameAirport);
-	int counter = 1;
+	int counter = 0;
 	char* textResult = (char*)malloc((lenName+1)*sizeof(char));
 	char* tempNameAirport = strdup(nameAirport);
 	char* word = NULL;
 	word = strtok(tempNameAirport,space);
-	int countWords = counterwords(nameAirport);
+	int countWords = counterwords(nameAirport); // ----> check this shit
 	while(word != NULL){
 		fixWord(word, nameAirport, counter, textResult, countWords);
 		if(islower(*word))
@@ -43,7 +43,7 @@ char* fixNameAirport(char* nameAirport){
 		counter++;
 	}
 	strcpy(nameAirport, textResult);
-	free(tempNameAirport);
+//	free(tempNameAirport); ---------------> check this shit
 	free(textResult);
 	return nameAirport;
 }
@@ -64,12 +64,7 @@ void fixWord(char* word, char* tempNameAirport, int counter, char* textResult, i
 	}
 	else // Last word:
 	{
-		if(isEvenAmountWord != 0 && countWords>1){ // the word not even
-			*(word) = tolower(*word);
-			strcat(textResult, word);
-		}
-		else
-			strcat(textResult, word);
+		fixLastWord(isEvenAmountWord, countWords, word, textResult);
 	}
 	free(tempWord);
 }
@@ -83,15 +78,38 @@ void changeDoubleSumOfLetters(char* word, int lenWord){
 	}
 }
 
-int counterwords(const char* nameAirport){
+int counterwords(char* nameAirport){
+//	rtrim(nameAirport, " ");
 	char* str = strdup(nameAirport);
 	if(str == NULL)
 		return 0;
-	int counter = 1;
+	int counter = 0;
 	for (int i = 0; str[i] != '\0'; ++i) {
 		if((str[i] == ' ' && str[i+1] != ' ') && str[0] != ' ')
 			counter++;
 	}
 	free(str);
 	return counter;
+}
+void fixLastWord(int isEvenAmountWord, int countWords, char* word, char* textResult){
+//	rtrim(word, " ");
+	if(isEvenAmountWord != 0 && countWords>1){ // the word not even
+		*(word) = tolower(*word);
+		strcat(textResult, word);
+	}
+	else
+		strcat(textResult, word);
+}
+
+char* rtrim(char *word, const char *seps)
+{
+	int i;
+	if (seps == NULL)
+		seps = "\t\n\v\f\r";
+	i = strlen(word) -1;
+	while (i >= 0 && strchr(seps, word[i] != '\0')){
+		word[i] = '\0';
+		i--;
+	}
+	return word;
 }

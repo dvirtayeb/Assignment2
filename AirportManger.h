@@ -11,12 +11,14 @@
 #include "Airport.h"
 #include <stdlib.h>
 
+#define CODE_SIZE 3
+
 typedef struct{
 	Airport** airportArr;
 	int amountAirport;
-}AirportManger;
+}AirportManager;
 
-Airport* addAirport();
-Airport* findAirport(AirportManger* airportManger,char* code);
-
+void userAddAirport();
+Airport* findAirport(AirportManager* airportManager,char* code);
+void addAirport(AirportManager airportM, char* nameAirport, char* nameState, char* nameCode);
 #endif /* AIRPORTMANGER_H_ */
