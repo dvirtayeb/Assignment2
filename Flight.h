@@ -1,25 +1,20 @@
-/*
- * Flight.h
- *
- *  Created on: 5 Dec 2020
- *      Author: dvirtayeb
- */
 
 #ifndef FLIGHT_H_
 #define FLIGHT_H_
 
-#include "Date.h";
+#include "Date.h"
 #include "Airport.h"
 
 typedef struct {
-	Airport* depatureAirport;
-	Airport* destinationAirpot;
+	char* depatureCode;
+	char* destinationCode;
 	int departureTime;
 	Date* date;
 }Flight;
 
-void isCurrectDestination(Flight* flight, char* code);
-Flight*
+int isCurrectDestination(Flight* flight, char* depCode,char* destCode);
+int numOfFlightsInLine(Flight** flights,char* depCode,char* destCode);
+
 
 
 #endif /* FLIGHT_H_ */

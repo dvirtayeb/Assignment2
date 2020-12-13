@@ -1,38 +1,49 @@
-/*
- * AirportManger.c
- *
- *  Created on: 30 Nov 2020
- *      Author: dvirtayeb
- */
+#include "AirportManager.h"
 
-#include "AirportManger.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
-void userAddAirport()
+
+void userAddAirport(AirportManager* airportM)
 {
 	Airport* newAirport = (Airport*)malloc(sizeof(Airport));
 	printf("Please enter a name: ");
-	fgets(newAirport->nameAirport, 255, stdin);
+	fgets(newAirport->nameAirport, STR_MAXSIZE, stdin);
 	printf("Please enter a state: ");
-	fgets(newAirport->nameState, 255, stdin);
+	fgets(newAirport->nameState, STR_MAXSIZE, stdin);
 	printf("Please enter the code of the airport: ");
 	fgets(newAirport->nameCode, CODE_SIZE, stdin);
 
+	addAirport(airportM,newAirport);
 
 	free(newAirport);
 }
 
-void addAirport(AirportManager airportM, char* nameAirport, char* nameState, char* nameCode)
+void addAirport(AirportManager* airportM, Airport* newAirport)
 {
-	Airport* newAirport = (Airport*)malloc(sizeof(Airport));
-	newAirport->nameAirport = nameAirport;
-	newAirport->nameState = nameState;
-	newAirport->nameCode = nameCode;
 
-	airportM->(airportArr+ strlen(airpotArr) - 1) = newAirport; // -------------> check this shit
+	if(airportM->amountAirport==0) {
+		airportM->airportArr=(Airport**)malloc(sizeof(Airport*));
+		airportM->airportArr[0]=newAirport;
+		airportM->amountAirport=1;
+	} else {
+		int len=airportM->amountAirport;
+		airportM->airportArr=(Airport**)realloc(airportM->airportArr, (len+1)*sizeof(Airport*));
+		airportM->airportArr[len]=newAirport;
+		airportM->amountAirport++;
+	}
 
-	free(newAirport);
 }
+
+Airport* findAirport(AirportManager* airportM,char* code){
+	for (int i = 0;  i < airportM->amountAirport; ++ i) {
+		if(strcmp(airportM->airportArr[i]->nameCode,code))
+				return airportM->airportArr[i];
+	}
+	return NULL;
+}
+
+
 

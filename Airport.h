@@ -1,10 +1,3 @@
-/*
- * Airport.h
- *
- *  Created on: 30 Nov 2020
- *      Author: dvirtayeb
- */
-
 #ifndef AIRPORT_H_
 #define AIRPORT_H_
 

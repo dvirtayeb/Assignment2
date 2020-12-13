@@ -1,12 +1,16 @@
-/*
- * Airline.h
- *
- *  Created on: 1 Dec 2020
- *      Author: dvirtayeb
- */
 
 #ifndef AIRLINE_H_
 #define AIRLINE_H_
+
+
+#include "Flight.h"
+
+typedef struct {
+	char* name;
+	int numOfFlights;
+	Flight** flights;
+}Airline;
+
 
 
 

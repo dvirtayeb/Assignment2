@@ -12,9 +12,11 @@ typedef struct {
 	int day;
 	int month;
 	int year;
+	char* dateStr;
 }Date;
 
-void addDate(int day, int month, int year);
+void addDate(Date* date,int day, int month, int year);
 char* toString(Date* date);
+void setDefault(Date *date);
 
 #endif /* DATE_H_ */

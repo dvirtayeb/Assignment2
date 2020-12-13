@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "Airport.h"
-#include "AirportManger.h"
+#include "AirportManager.h"
 
 int main(){
 	Airport* newAirport = (Airport*)malloc(sizeof(Airport));

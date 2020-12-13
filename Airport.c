@@ -1,9 +1,3 @@
-/*
- * Airport.c
- *
- *  Created on: 30 Nov 2020
- *      Author: dvirtayeb
- */
 #include "Airport.h"
 #include <string.h>
 #include <ctype.h>
@@ -17,7 +11,6 @@ int isEqualAirports(Airport* pAirport1, Airport* pAirport2)
 		return 1;
 	return 0;
 }
-
 
 int checkCodeIATA(Airport* pAirport,char* code)
 {
