@@ -9,28 +9,31 @@
 void userAddAirport(AirportManager* airportM)
 {
 	Airport* newAirport = (Airport*)malloc(sizeof(Airport));
-	printf("Please enter a name: ");
+	puts("Please enter a name: ");
+	newAirport->nameAirport = (char*)malloc(sizeof(char));
 	fgets(newAirport->nameAirport, STR_MAXSIZE, stdin);
-	printf("Please enter a state: ");
+	puts("Please enter a state: ");
+	newAirport->nameState = (char*)malloc(sizeof(char));
 	fgets(newAirport->nameState, STR_MAXSIZE, stdin);
-	printf("Please enter the code of the airport: ");
+	puts("Please enter the code of the airport: ");
+	newAirport->nameCode = (char*)malloc(sizeof(char));
 	fgets(newAirport->nameCode, CODE_SIZE, stdin);
 
 	addAirport(airportM,newAirport);
-
+	// ---------------- free all
 	free(newAirport);
 }
 
-void addAirport(AirportManager* airportM, Airport* newAirport)
+void addAirport(AirportManager* airportM, Airport[] newAirport)
 {
 
 	if(airportM->amountAirport==0) {
-		airportM->airportArr=(Airport**)malloc(sizeof(Airport*));
+		airportM->airportArr=(Airport)malloc(sizeof(Airport));
 		airportM->airportArr[0]=newAirport;
 		airportM->amountAirport=1;
 	} else {
 		int len=airportM->amountAirport;
-		airportM->airportArr=(Airport**)realloc(airportM->airportArr, (len+1)*sizeof(Airport*));
+		airportM->airportArr=(Airport)realloc(airportM->airportArr, (len+1)*sizeof(Airport));
 		airportM->airportArr[len]=newAirport;
 		airportM->amountAirport++;
 	}

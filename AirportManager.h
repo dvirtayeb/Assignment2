@@ -6,9 +6,10 @@
 
 #define CODE_SIZE 3
 #define STR_MAXSIZE 255
+#define SIZE 1
 
 typedef struct {
-	Airport** airportArr;
+	Airport airportArr[SIZE];
 	int amountAirport;
 }AirportManager;
 
