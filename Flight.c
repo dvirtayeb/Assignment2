@@ -6,6 +6,11 @@
 #include <stdio.h>
 #define MAX_STR 255
 
+void initFlight()
+{
+
+}
+
 int isCurrectDestination(Flight* flight, char* depCode,char* destCode){
 	if(flight->depatureCode==depCode && flight->destinationCode==destCode)
 		return 1;

@@ -1,9 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Airline.h"
+#include "Flight.h"
 
 
-void userAddFlight(Airline* airline, const int flightNum){
+void initAirline()
+{
+
+}
+
+
+void userAddFLightToAirline(Airline* airline, const int flightNum){
 	Flight* flight = (Flight*)malloc(sizeof(Flight));
 	puts("please enter departure code:");
 	flight->depatureCode= (char*)malloc(sizeof(char));
@@ -26,10 +33,15 @@ void userAddFlight(Airline* airline, const int flightNum){
 	free(flight);
 }
 
-void printNumFlights(Airline* airline, char* depCode,char* destCode){
-	for (int i = 0; i < airline->numOfFlights; ++i) {
-
-	}
+int printNumFlightsFromAirline(Airline* airline, char* depCode,char* destCode){
+	int counter= numOfFlightsInLine(airline->flights,depCode,destCode);
+	return counter;
 //	airline->flights
 }
+
+void freeAirline(Airline* airLine){
+
+}
+
+
 

@@ -9,7 +9,7 @@
 #define YEAR_LEN 4
 
 
-void userAddDate(Date* date,char* str){ // Check if the Date Format right and add the date
+void userAddDate(Date* date,char* str){ // Check if the Date Format right and add the date -> Maimon
 	int* day = (int*)malloc(sizeof(int));
 	int* month = (int*)malloc(sizeof(int));
 	int* year = (int*)malloc(sizeof(int));
@@ -21,7 +21,7 @@ void userAddDate(Date* date,char* str){ // Check if the Date Format right and ad
 	char* delimiter = "/";
 	if(lenDate != DATE_LENGTH){
 		puts("you did not insert date properly.");
-		// ---------------------------------------------> free all
+		free6Values(day,month,year,flag,counter,strTemp);
 		return;
 	}
 	temp = strtok(strTemp, delimiter);
@@ -33,7 +33,7 @@ void userAddDate(Date* date,char* str){ // Check if the Date Format right and ad
 		addDate(date,day,month,year);
 	else{
 		puts("you did not insert date properly.");
-		// ---------------------------------------------> free all
+		free6Values(day,month,year,flag,counter,strTemp);
 		return;
 	}
 }
@@ -114,4 +114,14 @@ void setDefault(Date *date){
 	date->month=1;
 	date->year=2021;
 }
+
+void freeDateValues(void* val1,void* val2, void* val3,void* val4, void* val5,void* val6){
+	free(val1);
+	free(val2);
+	free(val3);
+	free(val4);
+	free(val5);
+	free(val6);
+}
+
 

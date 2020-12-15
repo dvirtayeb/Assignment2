@@ -1,30 +1,24 @@
 #include "AirportManager.h"
+#include "Airport.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 
+void initAirportManager()//Maimon
+{
 
+}
 void userAddAirport(AirportManager* airportM)
 {
-	Airport* newAirport = (Airport*)malloc(sizeof(Airport));
-	puts("Please enter a name: ");
-	newAirport->nameAirport = (char*)malloc(sizeof(char));
-	fgets(newAirport->nameAirport, STR_MAXSIZE, stdin);
-	puts("Please enter a state: ");
-	newAirport->nameState = (char*)malloc(sizeof(char));
-	fgets(newAirport->nameState, STR_MAXSIZE, stdin);
-	puts("Please enter the code of the airport: ");
-	newAirport->nameCode = (char*)malloc(sizeof(char));
-	fgets(newAirport->nameCode, CODE_SIZE, stdin);
-
-	addAirport(airportM,newAirport);
-	// ---------------- free all
-	free(newAirport);
+	Airport* newAirport;
+	initAirport(newAirport);
+	addAirportToManager(airportM,newAirport);
+	freeAirport(newAirport,newAirport->nameAirport,newAirport->nameState,newAirport->IATACode);
 }
 
-void addAirport(AirportManager* airportM, Airport[] newAirport)
+void addAirportToManager(AirportManager* airportM, Airport* newAirport)
 {
 
 	if(airportM->amountAirport==0) {
@@ -42,11 +36,12 @@ void addAirport(AirportManager* airportM, Airport[] newAirport)
 
 Airport* findAirport(AirportManager* airportM,char* code){
 	for (int i = 0;  i < airportM->amountAirport; ++ i) {
-		if(strcmp(airportM->airportArr[i]->nameCode,code))
+		if(strcmp(airportM->airportArr[i]->IATACode,code))
 				return airportM->airportArr[i];
 	}
 	return NULL;
 }
+
 
 
 

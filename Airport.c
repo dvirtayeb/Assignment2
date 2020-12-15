@@ -5,21 +5,56 @@
 #include <stdio.h>
 #define MAX_STR 255
 
+void initAirport(Airport* newAirport)
+{
+	addAirportName(newAirport);
+	addAirportState(newAirport);
+	addIATACode(newAirport);
+
+}
+void addAirportName(Airport* newAirport)
+{
+	printf("Enter The Airport Name:");
+	newAirport->nameAirport = (char*)malloc(sizeof(char));
+	fgets(newAirport->nameAirport, 255, stdin);
+	fixNameAirport(newAirport->nameAirport);
+
+
+}
+void addAirportState(Airport* newAirport)
+{
+	printf("Enter The Airport State's Name:");
+	newAirport->nameState = (char*)malloc(sizeof(char));
+	fgets(newAirport->nameState, 255, stdin);
+}
+void addIATACode(Airport* newAirport) // check this shit
+{
+	int i=1;
+	printf("Enter The Airport's IATA Name in 3 uppercase characters exactly:");
+	newAirport->IATACode = (char*)malloc(sizeof(char));
+	fgets(newAirport->IATACode, SIZE, stdin);
+	while(i)
+	{
+
+	}
+}
+
 int isEqualAirports(Airport* pAirport1, Airport* pAirport2)
 {
-	if(strcmp(pAirport1->nameCode, pAirport2->nameCode))
+	if(strcmp(pAirport1->IATACode, pAirport2->IATACode))
 		return 1;
 	return 0;
 }
 
-int checkCodeIATA(Airport* pAirport,char* code)
+int checkCodeIATA(Airport* pAirport,char IATA[SIZE])
 {
-	if(strcmp(pAirport->nameCode, code))
+	if(strcmp(pAirport->IATACode, IATA))
 		return 1;
 	return 0;
 }
 
-char* fixNameAirport(char* nameAirport){
+void fixNameAirport(char* nameAirport)
+{
 	const char* space = " ";
 	int lenName = strlen(nameAirport);
 	int counter = 0;
@@ -38,10 +73,10 @@ char* fixNameAirport(char* nameAirport){
 	strcpy(nameAirport, textResult);
 //	free(tempNameAirport); ---------------> check this shit
 	free(textResult);
-	return nameAirport;
 }
 
-void fixWord(char* word, char* tempNameAirport, int counter, char* textResult, int countWords){
+void fixWord(char* word, char* tempNameAirport, int counter, char* textResult, int countWords)
+{
 	*word = toupper(*word); // term 1
 	char* tempWord = strdup(word);
 	int length = strlen(tempWord);
@@ -62,7 +97,8 @@ void fixWord(char* word, char* tempNameAirport, int counter, char* textResult, i
 	free(tempWord);
 }
 
-void changeDoubleSumOfLetters(char* word, int lenWord){
+void changeDoubleSumOfLetters(char* word, int lenWord)
+{
 	for (int i = 0; i < lenWord; ++i) {
 		if(i%2 == 0)
 			*(word + i) = toupper(*(word+i));
@@ -71,7 +107,8 @@ void changeDoubleSumOfLetters(char* word, int lenWord){
 	}
 }
 
-int counterwords(char* nameAirport){
+int counterwords(char* nameAirport)
+{
 //	rtrim(nameAirport, " ");
 	char* str = strdup(nameAirport);
 	if(str == NULL)
@@ -84,7 +121,8 @@ int counterwords(char* nameAirport){
 	free(str);
 	return counter;
 }
-void fixLastWord(int isEvenAmountWord, int countWords, char* word, char* textResult){
+void fixLastWord(int isEvenAmountWord, int countWords, char* word, char* textResult)
+{
 //	rtrim(word, " ");
 	if(isEvenAmountWord != 0 && countWords>1){ // the word not even
 		*(word) = tolower(*word);
@@ -94,7 +132,7 @@ void fixLastWord(int isEvenAmountWord, int countWords, char* word, char* textRes
 		strcat(textResult, word);
 }
 
-char* rtrim(char *word, const char *seps)
+char* rtrim(char *word, const char *seps) // MAYBE WE WILL NEED MAYBE NOT
 {
 	int i;
 	if (seps == NULL)
@@ -106,3 +144,11 @@ char* rtrim(char *word, const char *seps)
 	}
 	return word;
 }
+void freeAirport(Airport* air)
+{
+	free(air->nameAirport);
+	free(air->IATACode);
+	free(air->nameState);
+	free(air);
+}
+

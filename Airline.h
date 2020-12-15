@@ -11,9 +11,10 @@ typedef struct {
 	Flight** flights;
 }Airline;
 
-void userAddFLight(Airline* airline, const int flightNum);
+void userAddFLightToAirline(Airline* airline, const int flightNum);
 //void addFlight();
-void printNumFlights(Airline* airline, char* depCode,char* destCode);
+void initAirline();
+int printNumFlightsFromAirline(Airline* airline, char* depCode,char* destCode);
 
 
 
