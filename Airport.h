@@ -18,7 +18,9 @@ void fixNameAirport(char* nameAirport);
 void changeDoubleSumOfLetters(char* word, int lenWord);
 void fixWord(char* word, char* nameAirport, int counter, char* textResult, int countWords);
 void fixLastWord(int isEvenAmountWord, int countWords, char* word, char* textResult);
-char* rtrim(char *word, const char *seps);
+char *rtrim(char *word, const char *seps);
+char *ltrim(char *str, const char *seps);
+void trim(char *str, const char *seps);
 int counterwords(char* nameAirport);
 void freeAirport(Airport* newAirport);
 #endif /* AIRPORT_H_ */
