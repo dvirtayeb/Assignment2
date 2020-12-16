@@ -12,6 +12,7 @@
 #define PRINT_AMOUNT_FLIGHT_BETWEEN_AIRPORTS 5
 #define EXIT 6
 
-void menu(AirportManager* airportM, Airport** airport);
+void menu(AirportManager* airportM);
+void ChooseSizeAirport(AirportManager *airportM);
 
 #endif /* CONTROLLERMENU_H_ */

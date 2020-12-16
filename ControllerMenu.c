@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "ControllerMenu.h"
 
-void menu(AirportManager *airportM, Airport **airport) {
+void menu(AirportManager *airportM)
+{
 	int choose = 0;
 	do {
 		do {
@@ -63,4 +64,14 @@ void menu(AirportManager *airportM, Airport **airport) {
 			break;
 		}
 	} while (choose != EXIT);
+}
+
+void ChooseSizeAirport(AirportManager *airportM)
+{
+	int airportNum = 0;
+	puts("please enter how many Airports do you want:");
+				do{
+					scanf("%d",&airportNum);
+				}while(airportNum < 1);
+				airportM->airportArr= (Airport**)realloc(airport, airportNum*sizeof(airportM->airportArr));
 }
