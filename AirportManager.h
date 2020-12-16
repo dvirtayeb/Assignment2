@@ -6,14 +6,14 @@
 
 #define CODE_SIZE 3
 #define STR_MAXSIZE 255
-//#define SIZE 1
+#define SIZE_ARR 1
 
 typedef struct {
-	Airport airportArr[];
+	Airport* airportArr;
 	int amountAirport;
 }AirportManager;
 
-void initAirportManager();
+void initAirportManager(AirportManager* airportM);
 void userAddAirport(AirportManager* airportM);
 Airport* findAirport(AirportManager* airportM,char* code);
 void addAirportToManager(AirportManager* airportM, Airport* newAirport);

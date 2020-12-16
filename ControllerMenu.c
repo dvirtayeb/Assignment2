@@ -65,13 +65,3 @@ void menu(AirportManager *airportM)
 		}
 	} while (choose != EXIT);
 }
-
-void ChooseSizeAirport(AirportManager *airportM)
-{
-	int airportNum = 0;
-	puts("please enter how many Airports do you want:");
-				do{
-					scanf("%d",&airportNum);
-				}while(airportNum < 1);
-				airportM->airportArr= (Airport**)realloc(airport, airportNum*sizeof(airportM->airportArr));
-}
