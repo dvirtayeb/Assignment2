@@ -15,5 +15,6 @@ void addIATACode(Airport* newAirport);
 int isEqualAirports(Airport* pAirport1, Airport* pAriport2);
 int checkCodeIATA(Airport* pAirport,char IATA[SIZE]);
 void fixNameAirport(char* nameAirport);
+void printAirport(Airport *airport);
 void freeAirport(Airport* newAirport);
 #endif /* AIRPORT_H_ */

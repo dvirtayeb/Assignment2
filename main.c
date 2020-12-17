@@ -6,11 +6,17 @@
 #include "Airline.h"
 #include "ControllerMenu.h"
 
-int main(){
-	AirportManager* airportM = (AirportManager*)malloc(sizeof(AirportManager));
-	airportM->airportArr = (Airport**)malloc(sizeof(Airport*));
-	chooseSizeAirport(airportM);
-	menu(airportM);
+int main()
+{
+	Airport* air=(Airport*)malloc(sizeof(Airport));
+	initAirport(air);
+	printf("%s  %s",air->nameAirport,air->IATACode);
+	Airport* air2=(Airport*)malloc(sizeof(Airport));
+	initAirport(air2);
+	printf("%s  %s",air2->nameAirport,air2->IATACode);
+	//AirportManager* airportM = (AirportManager*)malloc(sizeof(AirportManager));
+	//initAirportManager(airportM);
+	//menu(airportM);
 	return 0;
 }
 

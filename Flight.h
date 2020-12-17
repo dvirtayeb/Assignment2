@@ -14,7 +14,9 @@ typedef struct {
 
 int isCurrectDestination(Flight* flight, char* depCode,char* destCode);
 int numOfFlightsInLine(Flight** flights,char* depCode,char* destCode);
-void initFlight();
+void initFlight(Flight* flight);
+void printFlight(Flight* flight);
+void freeFlight(Flight* flight);
 
 
 #endif /* FLIGHT_H_ */

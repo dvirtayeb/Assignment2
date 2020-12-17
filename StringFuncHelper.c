@@ -57,6 +57,17 @@ void fixLastWord(int isEvenAmountWord, int countWords, char* word, char* textRes
 	else
 		strcat(textResult, word);
 }
+int checkIfIATACorrect(char IATA[IATASIZE])
+{
+	for(int i=0;i<SIZE-1;i++)
+	{
+		if(!isupper(IATA[i]))
+		{
+			return 0 ;
+		}
+	}
+	return 1;
+}
 
 char *rtrim(char *str, const char *seps)
 {

@@ -21,6 +21,7 @@ void setDefault(Date *date);
 void userAddDate(Date* date,char* str);
 void checkDigit(char* temp, int* day, int* month, int* year, int* counter,int* flag);
 void insertCorrectInteger(char* temp, int* day, int* month, int* year,int* counter);
-void freeDateValues(void* val1,void* val2, void* val3,void* val4, void* val5,void* val6);
+void printDate(Date* date);
+void freeDateValues(void* val1,void* val2, void* val3,void* val4, void* val5,void* val6); // currently didnt touch until we fix the Date.
 
 #endif /* DATE_H_ */

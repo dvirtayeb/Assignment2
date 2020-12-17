@@ -4,43 +4,46 @@
 #include "Flight.h"
 
 
-void initAirline()
+void initAirline(Airline* airline) // initialize an empty airline
 {
-
+	puts("Enter the Airline Name:");
+	airline->name=(char*)malloc(sizeof(char));
+	fgets(airline->name,255,stdin);
+	airline->numOfFlights=0;
+	airline->flights=(Flight**)malloc(sizeof(Flight*));
 }
 
 
-void userAddFLightToAirline(Airline* airline, const int flightNum){
+void userAddFLightToAirline(Airline* airline){
 	Flight* flight = (Flight*)malloc(sizeof(Flight));
-	puts("please enter departure code:");
-	flight->depatureCode= (char*)malloc(sizeof(char));
-	fgets(flight->depatureCode,STR_MAXSIZE,stdin);
-	puts("please enter destination code:");
-	flight->destinationCode = (char*)malloc(sizeof(char));
-	fgets(flight->destinationCode,STR_MAXSIZE, stdin);
-	puts("please enter Integer number that provide the time flight:");
-	flight->departureTime = -1;
-	while(flight->departureTime < 0 || flight->departureTime >23)
-		scanf("%d", &flight->departureTime);
-	puts("please enter a date flight:");
-	char* textDate = (char*)malloc(sizeof(char));
-	fgets(textDate,STR_MAXSIZE,stdin);
-	Date* date = (Date*)malloc(sizeof(Date));
-	userAddDate(date, textDate);
-	airline->flights[flightNum] = flight; // ----> allocate(realloc) in the main
+	initFlight(flight);
+	airline->flights[airline->numOfFlights] = flight; // ----> allocate(realloc) in the main
 	airline->numOfFlights++;
-	// -----------> free all!!!!!!!!!!!
-	free(flight);
+	airline->flights=(Flight**)realloc(airline->flights, (airline->numOfFlights)*sizeof(Flight*));
+	freeFlight(flight);
 }
 
-int printNumFlightsFromAirline(Airline* airline, char* depCode,char* destCode){
+void printNumFlightsFromAirline(Airline* airline, char* depCode,char* destCode){
 	int counter= numOfFlightsInLine(airline->flights,depCode,destCode);
-	return counter;
-//	airline->flights
+	printf("%s: There are %d Flights in the required line",airline->name,counter);
+//	for(int i=0;i<airline->numOfFlights;i++)
+//	{
+//		printFlight(airline->flights[i]);
+//	}
+}
+void printAirline(Airline* airline)
+{
+	printf("Airline \"%s\" has %d Flights in it : \n",airline->name,airline->numOfFlights);
+	for ( int i = 0;  i < airline->numOfFlights; i++) {
+		printFlight(airline->flights[i]);
+	}
 }
 
-void freeAirline(Airline* airLine){
-
+void freeAirline(Airline* airline)
+{
+	free(airline->name);
+	free(airline->flights);
+	free(airline);
 }
 
 

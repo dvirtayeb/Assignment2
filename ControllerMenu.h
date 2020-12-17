@@ -13,6 +13,5 @@
 #define EXIT 6
 
 void menu(AirportManager* airportM);
-void ChooseSizeAirport(AirportManager *airportM);
 
 #endif /* CONTROLLERMENU_H_ */

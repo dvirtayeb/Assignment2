@@ -14,14 +14,14 @@ void userAddDate(Date* date,char* str){ // Check if the Date Format right and ad
 	int* month = (int*)malloc(sizeof(int));
 	int* year = (int*)malloc(sizeof(int));
 	int* flag = (int*)malloc(sizeof(int)); // boolean-date format
-	int* counter = (int*)malloc(sizeof(int)); // between day-month-year
+	int* counter = (int*)malloc(sizeof(int)); // Counter[day]=0 ,Counter[month]=1, Counter[year] =2
 	int lenDate = strlen(str);
 	char* temp;
 	char* strTemp = strdup(str);
 	char* delimiter = "/";
 	if(lenDate != DATE_LENGTH){
 		puts("you did not insert date properly.");
-		free6Values(day,month,year,flag,counter,strTemp);
+//		free6Values(day,month,year,flag,counter,strTemp);
 		return;
 	}
 	temp = strtok(strTemp, delimiter);
@@ -33,7 +33,7 @@ void userAddDate(Date* date,char* str){ // Check if the Date Format right and ad
 		addDate(date,day,month,year);
 	else{
 		puts("you did not insert date properly.");
-		free6Values(day,month,year,flag,counter,strTemp);
+//		free6Values(day,month,year,flag,counter,strTemp);
 		return;
 	}
 }
@@ -109,10 +109,15 @@ char* toString(Date *date) {
 	return str; // ----- remember to free it
 }
 
-void setDefault(Date *date){
+void setDefault(Date* date)
+{
 	date->day=1;
 	date->month=1;
 	date->year=2021;
+}
+void printDate(Date* date)
+{
+	printf("Date: %s",date->dateStr);
 }
 
 void freeDateValues(void* val1,void* val2, void* val3,void* val4, void* val5,void* val6){

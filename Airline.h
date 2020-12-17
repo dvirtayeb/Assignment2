@@ -11,10 +11,11 @@ typedef struct {
 	Flight** flights;
 }Airline;
 
-void userAddFLightToAirline(Airline* airline, const int flightNum);
-//void addFlight();
-void initAirline();
-int printNumFlightsFromAirline(Airline* airline, char* depCode,char* destCode);
+void userAddFLightToAirline(Airline* airline);
+void initAirline(Airline* airline);
+void printNumFlightsFromAirline(Airline* airline, char* depCode,char* destCode);
+void printAirline(Airline* airline);
+void freeAirline(Airline* airline);
 
 
 
