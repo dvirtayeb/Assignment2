@@ -8,13 +8,13 @@ void initAirline(Airline* airline) // initialize an empty airline
 {
 	puts("Enter the Airline Name:");
 	airline->name=(char*)malloc(sizeof(char));
-	fgets(airline->name,255,stdin);
+	scanf("%[^\n]%*c",airline->name);
 	airline->numOfFlights=0;
 	airline->flights=(Flight**)malloc(sizeof(Flight*));
 }
 
 
-void userAddFLightToAirline(Airline* airline){
+void userAddFlightToAirline(Airline* airline){
 	Flight* flight = (Flight*)malloc(sizeof(Flight));
 	initFlight(flight);
 	airline->flights[airline->numOfFlights] = flight; // ----> allocate(realloc) in the main

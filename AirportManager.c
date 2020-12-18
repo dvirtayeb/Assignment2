@@ -12,6 +12,7 @@ void initAirportManager(AirportManager* airportM)
 	puts("please enter how many Airports do you want:");
 	do{
 		scanf("%d",&airportNum);
+		getchar();
 	}while(airportNum < 1);
 	for (int i = 0; i < airportNum; ++i) {
 		userAddAirport(airportM);
@@ -19,13 +20,13 @@ void initAirportManager(AirportManager* airportM)
 }
 void userAddAirport(AirportManager* airportM)
 {
-	Airport* newAirport=NULL;
+	Airport* newAirport=(Airport*)malloc(sizeof(Airport));
 	initAirport(newAirport);
 	addAirportToManager(airportM,newAirport);
 	freeAirport(newAirport);
 }
 
-void addAirportToManager(AirportManager* airportM, Airport* newAirport)
+int addAirportToManager(AirportManager* airportM, Airport* newAirport)
 {
 
 	if(airportM->amountAirport==0) {
@@ -33,12 +34,17 @@ void addAirportToManager(AirportManager* airportM, Airport* newAirport)
 		*(airportM->airportArr) = *(newAirport);
 		airportM->amountAirport=1;
 	} else {
+
+		for (int i = 0; i < airportM->amountAirport; ++i) {
+				if((checkCodeIATA((airportM->airportArr + i), newAirport->IATACode)))
+					return 0;
+			}
 		int len=airportM->amountAirport;
 		airportM->airportArr=(Airport*)realloc(airportM->airportArr, (len+1)*sizeof(Airport));
 		*(airportM->airportArr + len) = *(newAirport);
 		airportM->amountAirport++;
 	}
-
+	return 1;
 }
 
 Airport* findAirport(AirportManager* airportM,char* code)

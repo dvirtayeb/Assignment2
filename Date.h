@@ -1,12 +1,9 @@
-/*
- * Date.h
- *
- *  Created on: 5 Dec 2020
- *      Author: dvirtayeb
- */
-
 #ifndef DATE_H_
 #define DATE_H_
+
+#define DATE_LENGTH 10
+#define DAY_O_MONTH_LEN 2
+#define YEAR_LEN 4
 
 typedef struct {
 	int day;
@@ -15,13 +12,12 @@ typedef struct {
 	char* dateStr;
 }Date;
 
-void addDate(Date* date,int* day, int* month, int* year);
-char* toString(Date* date);
+void addDate(Date* date);
+char* toString(Date* date, char* str);
 void setDefault(Date *date);
 void userAddDate(Date* date,char* str);
-void checkDigit(char* temp, int* day, int* month, int* year, int* counter,int* flag);
-void insertCorrectInteger(char* temp, int* day, int* month, int* year,int* counter);
+int checkDigit(Date* date, char* temp, int* counter,int* flag);
+void insertIntegerValues(Date* date, char* temp, int* counter);
 void printDate(Date* date);
-void freeDateValues(void* val1,void* val2, void* val3,void* val4, void* val5,void* val6); // currently didnt touch until we fix the Date.
 
 #endif /* DATE_H_ */

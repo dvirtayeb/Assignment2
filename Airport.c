@@ -4,7 +4,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
-#define MAX_STR 255
 
 void initAirport(Airport *newAirport) {
 	addAirportName(newAirport);
@@ -13,27 +12,28 @@ void initAirport(Airport *newAirport) {
 }
 void addAirportName(Airport *newAirport) {
 	puts("Enter The Airport Name:");
+//	newAirport->nameAirport = (char*)realloc(newAirport->nameAirport,sizeof(char));
 	newAirport->nameAirport = (char*) malloc(sizeof(char));
-	fgets(newAirport->nameAirport, 255, stdin);
+	do{
+//		fgets(newAirport->nameAirport,MAX_STR, stdin);
+		scanf("%[^\n]%*c",newAirport->nameAirport);
+		if(strlen(newAirport->nameAirport) == 0)
+			puts("you didn't insert probably");
+	}while(strlen(newAirport->nameAirport) == 0);
 	fixNameAirport(newAirport->nameAirport);
 }
 void addAirportState(Airport *newAirport) {
 	puts("Enter The Airport State's Name:");
 	newAirport->nameState = (char*) malloc(sizeof(char));
-	fgets(newAirport->nameState, 255, stdin);
+	scanf("%[^\n]%*c", newAirport->nameState);
 }
 void addIATACode(Airport *newAirport) // check this shit
 {
-	char temp[SIZE];
-	puts("Enter The Airport's IATA Name in 3 uppercase characters exactly:");
-	fgets(temp, SIZE, stdin);
-	while (!checkIfIATACorrect(temp)) //From here
-	{
-		puts(
-				"You've entered a wrong IATA Code ! Please Try Again with 3 Exactly Uppercase Letters");
-		fgets(temp, SIZE, stdin);
-	} // Until here -> will be a function
-	newAirport->IATACode = &temp; // check shiet
+	char temp[MAX_STR] ="";
+	createCodeHelper(newAirport, temp);
+	for (int i = 0; i < SIZE-1; ++i) {
+		newAirport->IATACode[i] = temp[i];
+	}
 }
 
 int isEqualAirports(Airport *pAirport1, Airport *pAirport2) {
@@ -48,13 +48,27 @@ int checkCodeIATA(Airport *pAirport, char IATA[SIZE]) {
 	return 0;
 }
 
+void createCodeHelper(Airport* newAirport, char* code)
+{
+	do{
+			puts("Enter The Airport's IATA Name in 3 uppercase characters exactly:");
+			scanf("%[^\n]%*c", code);
+			if(!checkIfIATACorrect(code)){
+				puts("You've entered a wrong IATA Code!");
+			}
+		}while (!checkIfIATACorrect(code));
+}
+
 void fixNameAirport(char *nameAirport) {
 	trim(nameAirport, NULL);
 	const char *space = " ";
-	int lenName = strlen(nameAirport);
+//	int lenName = strlen(nameAirport);
 	int counter = 0;
-	char *textResult = (char*) malloc((lenName + 1) * sizeof(char));
-	char *tempNameAirport = strdup(nameAirport);
+	char textResult[MAX_STR] = "";
+	char tempNameAirport[MAX_STR] = "";
+	strcpy(tempNameAirport, nameAirport);
+//	char* textResult = (char*) malloc((lenName + 1));
+//	char *tempNameAirport = strdup(nameAirport);
 	char *word = NULL;
 	word = strtok(tempNameAirport, space);
 	int countWords = counterwords(nameAirport);
@@ -66,8 +80,6 @@ void fixNameAirport(char *nameAirport) {
 		counter++;
 	}
 	strcpy(nameAirport, textResult);
-	//free(tempNameAirport); //---------------> check this shit
-	free(textResult);
 }
 void printAirport(Airport *airport) {
 	printf("%s Airport, Located in %s State \n and its IATA is : %s",

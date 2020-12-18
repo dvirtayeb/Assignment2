@@ -3,111 +3,102 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Date.h"
-#define MAX_STR 255
-#define DATE_LENGTH 10
-#define DAY_O_MONTH_LEN 2
-#define YEAR_LEN 4
+#include "StringFuncHelper.h"
 
 
-void userAddDate(Date* date,char* str){ // Check if the Date Format right and add the date -> Maimon
-	int* day = (int*)malloc(sizeof(int));
-	int* month = (int*)malloc(sizeof(int));
-	int* year = (int*)malloc(sizeof(int));
-	int* flag = (int*)malloc(sizeof(int)); // boolean-date format
-	int* counter = (int*)malloc(sizeof(int)); // Counter[day]=0 ,Counter[month]=1, Counter[year] =2
+void userAddDate(Date* date, char* str)
+{ // Check if the Date Format right and add the date
+	int flag = 0;
+	int counterValidDate = 0; // Counter[day]=0 ,Counter[month]=1, Counter[year] =2
 	int lenDate = strlen(str);
 	char* temp;
 	char* strTemp = strdup(str);
 	char* delimiter = "/";
 	if(lenDate != DATE_LENGTH){
 		puts("you did not insert date properly.");
-//		free6Values(day,month,year,flag,counter,strTemp);
 		return;
 	}
 	temp = strtok(strTemp, delimiter);
-	while(temp != NULL && *(flag) ==0){
-		checkDigit(temp, day, month, year, counter, flag);
+	while(temp != NULL && flag ==0){
+		flag = checkDigit(date, temp, &counterValidDate, &flag);
+		if(!flag)
+			break;
+		insertIntegerValues(date, temp, &counterValidDate);
 		temp = strtok(NULL,delimiter);
 	}
-	if(*(flag) != 1)
-		addDate(date,day,month,year);
+	if(flag){
+		addDate(date);
+		date->dateStr = str;
+	}
 	else{
 		puts("you did not insert date properly.");
-//		free6Values(day,month,year,flag,counter,strTemp);
 		return;
 	}
 }
 
-void checkDigit(char* temp,int* day, int* month, int* year, int* counter, int* flag){
+int checkDigit(Date* date, char* temp, int* counterValidDate, int* flag)
+{
 	int lenTemp = strlen(temp);
 	for (int i = 0; i < lenTemp; ++i) {
 		if(lenTemp == DAY_O_MONTH_LEN){ // check for day/month
-			if(!isdigit(temp[i])){
-				*(flag) =1;
-				return;
-			}
+			if(!isdigit(temp[i]))
+				return 0;
 		}
-		else if(lenTemp == YEAR_LEN && *counter > 1){ // check for year
-			if(!isdigit(temp[i])){
-				*(flag) =1;
-				return;
-			}
+		else if(lenTemp == YEAR_LEN && *counterValidDate > 1){ // check for year
+			if(!isdigit(temp[i]))
+				return 0;
 		}
-		else{
-			*(flag) =1;
-			return;
-		}
+		else
+			return 0;
 	}
-	insertCorrectInteger(temp, day, month, year, counter);
+	return 1;
 }
 
-void insertCorrectInteger(char* temp, int* day, int* month, int* year,int* counter){
-	if(*counter == 0){
-				*day = atoi(temp);
-				(*counter)++;
-			}
-			else if(*counter == 1){
-				*month = atoi(temp);
-				(*counter)++;
-			}
-			else if(*counter > 1){
-				*year = atoi(temp);
-			}
-			else{
-				return;
-			}
+void insertIntegerValues(Date* date, char* temp, int* counterValidDate)
+{
+	if(*counterValidDate == 0){
+		date->day = atoi(temp);
+		(*counterValidDate)++;
+	}
+	else if(*counterValidDate == 1){
+		date->month = atoi(temp);
+		(*counterValidDate)++;
+	}
+	else if(*counterValidDate > 1){
+		date->year = atoi(temp);
+	}
+	else{
+		return;
+	}
 }
 
-void addDate(Date *date, int* day, int* month, int* year) { // Insert the date
+void addDate(Date *date) { // check if not valid insert default date
 	int monthLength[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	if (*month > 0 && *month <= 12) {
-		date->month = *month;
-		if (*day > 0 && *day <= monthLength[date->month -1]) {
-			date->day = *day;
-			if (*year > 999 && *year <= 2050){
-				date->year = *year;
-			}else {
+	if (date->month > 0 && date->month <= 12) {
+		if (date->day > 0 && date->day <= monthLength[date->month -1]) {
+			if (date->year > 999 && date->year <= 2050)
+				return;
+			else
 				setDefault(date); // 01/01/2021
-			}
-		} else
+		}else
 			setDefault(date);
 	} else
 		setDefault(date);
-	date->dateStr = toString(date);
+//	char str[MAX_STR] ="";
+//	date->dateStr = toString(date, str);
 }
 
-char* toString(Date *date) {
-	char* str = (char*)malloc(DATE_LENGTH*sizeof(char)); //
-	int dayFirstDig,daySecDig,monthFirstDig,monthSecDig,years;
-	dayFirstDig=date->day/10;
-	daySecDig=date->day%10;
-	monthFirstDig=date->month/10;
-	monthSecDig=date->month%10;
-	years=date->year;
-	sprintf(str, "%d%d/%d%d/%d", dayFirstDig,daySecDig,monthFirstDig,monthSecDig,years);
-
-	return str; // ----- remember to free it
-}
+//char* toString(Date *date, char* str) {
+//	int dayFirstDig,daySecDig,monthFirstDig,monthSecDig,years;
+//	dayFirstDig=date->day/10;
+//	daySecDig=date->day%10;
+//	monthFirstDig=date->month/10;
+//	monthSecDig=date->month%10;
+//	years=date->year;
+//	sprintf(str, "%d%d/%d%d/%d", dayFirstDig,daySecDig,monthFirstDig,monthSecDig,years);
+//
+//	return str;
+//}
 
 void setDefault(Date* date)
 {
@@ -117,16 +108,7 @@ void setDefault(Date* date)
 }
 void printDate(Date* date)
 {
-	printf("Date: %s",date->dateStr);
-}
-
-void freeDateValues(void* val1,void* val2, void* val3,void* val4, void* val5,void* val6){
-	free(val1);
-	free(val2);
-	free(val3);
-	free(val4);
-	free(val5);
-	free(val6);
+	printf("Date: %d/%d/%d", date->day, date->month, date->year);
 }
 
 
