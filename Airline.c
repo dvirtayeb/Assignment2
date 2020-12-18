@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "Airline.h"
 #include "Flight.h"
-
+#include "Airport.h"
 
 void initAirline(Airline* airline) // initialize an empty airline
 {
@@ -26,11 +26,19 @@ void userAddFlightToAirline(Airline* airline){
 void printNumFlightsFromAirline(Airline* airline, char* depCode,char* destCode){
 	int counter= numOfFlightsInLine(airline->flights,depCode,destCode);
 	printf("%s: There are %d Flights in the required line",airline->name,counter);
-//	for(int i=0;i<airline->numOfFlights;i++)
-//	{
-//		printFlight(airline->flights[i]);
-//	}
+
 }
+void getAndPrintFlightsBetween2Airports(Airline* airline){
+	char depCode[SIZE]="";
+	char destCode[SIZE]="";
+	puts("please enter Source IATA code:");
+	scanIATACode(depCode);
+	puts("please enter Destination IATA code:");
+	scanIATACode(destCode);
+	printNumFlightsFromAirline(airline, depCode, destCode);
+
+}
+
 void printAirline(Airline* airline)
 {
 	printf("Airline \"%s\" has %d Flights in it : \n",airline->name,airline->numOfFlights);

@@ -13,7 +13,7 @@ void addAirportName(Airport* newAirport);
 void addAirportState(Airport* newAirport);
 void addIATACode(Airport* newAirport);
 int isEqualAirports(Airport* pAirport1, Airport* pAriport2);
-int checkCodeIATA(Airport* pAirport,char IATA[SIZE]);
+int checkCodeIATAisEqual(Airport* pAirport,char IATA[SIZE]);
 void createCodeHelper(Airport* newAirport, char* code);
 void fixNameAirport(char* nameAirport);
 void printAirport(Airport *airport);

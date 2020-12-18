@@ -9,6 +9,7 @@ void changeDoubleSumOfLetters(char* word, int lenWord);
 int counterwords(char* nameAirport);
 void fixLastWord(int isEvenAmountWord, int countWords, char* word, char* textResult);
 int checkIfIATACorrect(char IATA[IATA_SIZE]);
+void scanIATACode(char* code);
 char *rtrim(char *str, const char *seps);
 char *ltrim(char *str, const char *seps);
 void trim(char *str, const char *seps);

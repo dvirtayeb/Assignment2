@@ -19,9 +19,12 @@ int main()
 
 
 	// Final MAIN:
+	Airline* airline=(Airline*)malloc(sizeof(Airline));
 	AirportManager* airportM = (AirportManager*)malloc(sizeof(AirportManager));
+	initAirline(airline);
 	initAirportManager(airportM);
-	menu(airportM);
+
+	menu(airportM,airline);
 	return 0;
 }
 

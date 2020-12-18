@@ -15,15 +15,19 @@ void initAirportManager(AirportManager* airportM)
 		getchar();
 	}while(airportNum < 1);
 	for (int i = 0; i < airportNum; ++i) {
-		userAddAirport(airportM);
+		userAddAirportToManager(airportM);
 	}
 }
-void userAddAirport(AirportManager* airportM)
+void userAddAirportToManager(AirportManager* airportM)
 {
 	Airport* newAirport=(Airport*)malloc(sizeof(Airport));
-	initAirport(newAirport);
-	addAirportToManager(airportM,newAirport);
-	freeAirport(newAirport);
+	int flag = 0;
+	while(!flag){
+		initAirport(newAirport);
+		flag=addAirportToManager(airportM,newAirport);
+		if(!flag) puts("This Airport code exists allready");
+	}
+	//freeAirport(newAirport);
 }
 
 int addAirportToManager(AirportManager* airportM, Airport* newAirport)
@@ -36,7 +40,7 @@ int addAirportToManager(AirportManager* airportM, Airport* newAirport)
 	} else {
 
 		for (int i = 0; i < airportM->amountAirport; ++i) {
-				if((checkCodeIATA((airportM->airportArr + i), newAirport->IATACode)))
+				if((checkCodeIATAisEqual((airportM->airportArr + i), newAirport->IATACode)))
 					return 0;
 			}
 		int len=airportM->amountAirport;
@@ -62,6 +66,11 @@ void printAirportManager(AirportManager* airportM)
 	{
 		printAirport(airportM->airportArr+i);
 	}
+}
+void freeAirportManager(AirportManager* airportM)
+{
+	free(airportM->airportArr);
+	free(airportM);
 }
 
 

@@ -70,6 +70,16 @@ int checkIfIATACorrect(char IATACode[IATA_SIZE])
 	}
 	return 1;
 }
+void scanIATACode(char* code)
+{
+	int flag=0;
+		while (!flag) {
+
+			scanf("%[^\n]%*c", code); // Check IATA
+			flag=checkIfIATACorrect(code);
+			if(!flag) puts("Wrong IATA input, enter exactly 3 UPPERCASE characters");
+		}
+}
 
 char *rtrim(char *str, const char *seps)
 {

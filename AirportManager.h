@@ -12,7 +12,8 @@ typedef struct {
 }AirportManager;
 
 void initAirportManager(AirportManager* airportM);
-void userAddAirport(AirportManager* airportM);
+void userAddAirportToManager(AirportManager* airportM);
 Airport* findAirport(AirportManager* airportM,char* code);
 int addAirportToManager(AirportManager* airportM, Airport* newAirport);
+void freeAirportManager(AirportManager* airportM);
 #endif /* AIRPORTMANAGER_H_ */
