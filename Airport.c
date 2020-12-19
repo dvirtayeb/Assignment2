@@ -12,7 +12,7 @@ void initAirport(Airport *newAirport) {
 }
 void addAirportName(Airport *newAirport) {
 	puts("Enter The Airport Name:");
-	newAirport->nameAirport = (char*) malloc(sizeof(char));
+	newAirport->nameAirport = (char*) malloc(MAX_STR*sizeof(char));
 	do {
 		scanf("%[^\n]%*c", newAirport->nameAirport);
 		if (strlen(newAirport->nameAirport) == 0)
@@ -22,7 +22,7 @@ void addAirportName(Airport *newAirport) {
 }
 void addAirportState(Airport *newAirport) {
 	puts("Enter The Airport State's Name:");
-	newAirport->nameState = (char*) malloc(sizeof(char));
+	newAirport->nameState = (char*) malloc(MAX_STR*sizeof(char));
 	scanf("%[^\n]%*c", newAirport->nameState);
 }
 void addIATACode(Airport *newAirport) {
@@ -38,8 +38,8 @@ int isEqualAirports(Airport *pAirport1, Airport *pAirport2) {
 
 int checkCodeIATAisEqual(Airport *pAirport, char IATA[SIZE]) {
 	if (strcmp(pAirport->IATACode, IATA))
-		return 1;
-	return 0;
+		return 0;
+	return 1;
 }
 
 void createCodeHelper(Airport *newAirport, char *code) {

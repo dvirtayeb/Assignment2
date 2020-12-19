@@ -21,13 +21,13 @@ void initAirportManager(AirportManager* airportM)
 void userAddAirportToManager(AirportManager* airportM)
 {
 	Airport* newAirport=(Airport*)malloc(sizeof(Airport));
-	int flag = 0;
-	while(!flag){
+	int flag;
+	do{
 		initAirport(newAirport);
 		flag=addAirportToManager(airportM,newAirport);
-		if(!flag) puts("This Airport code exists allready");
-	}
-	//freeAirport(newAirport);
+		if(flag) puts("This Airport code exists already");
+	}while(flag);
+	puts("Airport Added!");
 }
 
 int addAirportToManager(AirportManager* airportM, Airport* newAirport)
@@ -41,14 +41,14 @@ int addAirportToManager(AirportManager* airportM, Airport* newAirport)
 
 		for (int i = 0; i < airportM->amountAirport; ++i) {
 				if((checkCodeIATAisEqual((airportM->airportArr + i), newAirport->IATACode)))
-					return 0;
+					return 1;
 			}
 		int len=airportM->amountAirport;
 		airportM->airportArr=(Airport*)realloc(airportM->airportArr, (len+1)*sizeof(Airport));
 		*(airportM->airportArr + len) = *(newAirport);
 		airportM->amountAirport++;
 	}
-	return 1;
+	return 0;
 }
 
 Airport* findAirport(AirportManager* airportM,char* code)

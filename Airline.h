@@ -13,7 +13,7 @@ typedef struct {
 
 void userAddFlightToAirline(Airline* airline);
 void initAirline(Airline* airline);
-void printNumFlightsFromAirline(Airline* airline, char* depCode,char* destCode);
+void printNumFlightsFromAirline(Airline* airline,const char* depCode, const char* destCode);
 void getAndPrintFlightsBetween2Airports(Airline* airline);
 void printAirline(Airline* airline);
 void freeAirline(Airline* airline);

@@ -14,10 +14,10 @@ void initFlight(Flight *flight) {
 void initFlightCodes(Flight *flight)
 {
 	puts("please enter departure IATA code:");
-	flight->depatureCode = (char*)malloc(sizeof(char));
+	flight->depatureCode = (char*)malloc(MAX_STR*sizeof(char));
 	scanIATACode(flight->depatureCode);
 	puts("please enter destination IATA code:");
-	flight->destinationCode = (char*) malloc(sizeof(char));
+	flight->destinationCode = (char*) malloc(MAX_STR*sizeof(char));
 	scanIATACode(flight->destinationCode);
 }
 void initFlightTimeAndDate(Flight *flight) {
@@ -25,22 +25,30 @@ void initFlightTimeAndDate(Flight *flight) {
 	flight->departureTime = -1;
 	while (flight->departureTime < 0 || flight->departureTime > 23) {
 		scanf("%d", &flight->departureTime);
+		getchar();
+		if(flight->departureTime < 0 || flight->departureTime > 23)
+			puts("departure Time is not correct, please insert again.");
 	}
 	puts("please enter a date flight:");
-	char *textDate = (char*) malloc(sizeof(char));
-	scanf("%[^\n]%*c", textDate);
+	char *textDate = (char*) malloc(MAX_STR*sizeof(char));
 	flight->date = (Date*) malloc(sizeof(Date));
-	userAddDate(flight->date, textDate);
+	int flag;
+	do{
+		scanf("%[^\n]%*c", textDate);
+		flag = userAddDate(flight->date, textDate);
+		if(!flag)
+			puts("Enter the date in the right format: dd/mm/yyyy");
+	}while(!flag);
 }
 
-int isCurrectDestination(Flight *flight, char *depCode, char *destCode) {
-	if (flight->depatureCode == depCode && flight->destinationCode == destCode)
+int isCurrectDestination(Flight *flight, const char *depCode, const char *destCode) {
+	if (!strcmp(flight->depatureCode, depCode) && !strcmp(flight->destinationCode, destCode))
 		return 1;
 
 	return 0;
 }
 
-int numOfFlightsInLine(Flight **flights, char *depCode, char *destCode) {
+int numOfFlightsInLine(Flight **flights,const char *depCode,const char *destCode) {
 	int counter = 0;
 	int i = 0;
 	while (flights[i] != NULL) {

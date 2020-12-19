@@ -12,8 +12,8 @@ typedef struct {
 	Date* date;
 }Flight;
 
-int isCurrectDestination(Flight* flight, char* depCode,char* destCode);
-int numOfFlightsInLine(Flight** flights,char* depCode,char* destCode);
+int isCurrectDestination(Flight* flight, const char* depCode, const char* destCode);
+int numOfFlightsInLine(Flight** flights, const char* depCode,const char* destCode);
 void initFlight(Flight* flight);
 void initFlightTimeAndDate(Flight* flight);
 void initFlightCodes(Flight* flight);

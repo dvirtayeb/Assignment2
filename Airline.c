@@ -3,11 +3,12 @@
 #include "Airline.h"
 #include "Flight.h"
 #include "Airport.h"
+#include "StringFuncHelper.h"
 
 void initAirline(Airline* airline) // initialize an empty airline
 {
 	puts("Enter the Airline Name:");
-	airline->name=(char*)malloc(sizeof(char));
+	airline->name=(char*)malloc(MAX_STR*sizeof(char));
 	scanf("%[^\n]%*c",airline->name);
 	airline->numOfFlights=0;
 	airline->flights=(Flight**)malloc(sizeof(Flight*));
@@ -20,12 +21,12 @@ void userAddFlightToAirline(Airline* airline){
 	airline->flights[airline->numOfFlights] = flight; // ----> allocate(realloc) in the main
 	airline->numOfFlights++;
 	airline->flights=(Flight**)realloc(airline->flights, (airline->numOfFlights)*sizeof(Flight*));
-	freeFlight(flight);
+	puts("Flight added");
 }
 
-void printNumFlightsFromAirline(Airline* airline, char* depCode,char* destCode){
+void printNumFlightsFromAirline(Airline* airline,const char* depCode,const char* destCode){
 	int counter= numOfFlightsInLine(airline->flights,depCode,destCode);
-	printf("%s: There are %d Flights in the required line",airline->name,counter);
+	printf("Airline %s: There are %d Flights in the required line\n",airline->name,counter);
 
 }
 void getAndPrintFlightsBetween2Airports(Airline* airline){

@@ -15,7 +15,7 @@ void menu(AirportManager *airportM,Airline* airline)
 						"6. Exit");
 			puts("Choose a number: ");
 			scanf("%d", &choose);
-			//getchar();
+			getchar();
 			if(choose <= 0 || choose > 6)
 				puts("Please choose again, ");
 		} while (choose <= 0 || choose > 6);

@@ -15,7 +15,7 @@ typedef struct {
 void addDate(Date* date);
 char* toString(Date* date, char* str);
 void setDefault(Date *date);
-void userAddDate(Date* date,char* str);
+int userAddDate(Date* date,char* str);
 int checkDigit(Date* date, char* temp, int* counter,int* flag);
 void insertIntegerValues(Date* date, char* temp, int* counter);
 void printDate(Date* date);

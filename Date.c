@@ -6,9 +6,9 @@
 #include "StringFuncHelper.h"
 
 
-void userAddDate(Date* date, char* str)
+int userAddDate(Date* date, char* str)
 { // Check if the Date Format right and add the date
-	int flag = 0;
+	int flag = 1;
 	int counterValidDate = 0; // Counter[day]=0 ,Counter[month]=1, Counter[year] =2
 	int lenDate = strlen(str);
 	char* temp;
@@ -16,10 +16,10 @@ void userAddDate(Date* date, char* str)
 	char* delimiter = "/";
 	if(lenDate != DATE_LENGTH){
 		puts("you did not insert date properly.");
-		return;
+		return 0;
 	}
 	temp = strtok(strTemp, delimiter);
-	while(temp != NULL && flag ==0){
+	while(temp != NULL && flag ==1){
 		flag = checkDigit(date, temp, &counterValidDate, &flag);
 		if(!flag)
 			break;
@@ -32,8 +32,9 @@ void userAddDate(Date* date, char* str)
 	}
 	else{
 		puts("you did not insert date properly.");
-		return;
+		return 0;
 	}
+	return 1;
 }
 
 int checkDigit(Date* date, char* temp, int* counterValidDate, int* flag)
@@ -84,31 +85,18 @@ void addDate(Date *date) { // check if not valid insert default date
 			setDefault(date);
 	} else
 		setDefault(date);
-//	char str[MAX_STR] ="";
-//	date->dateStr = toString(date, str);
 }
-
-//char* toString(Date *date, char* str) {
-//	int dayFirstDig,daySecDig,monthFirstDig,monthSecDig,years;
-//	dayFirstDig=date->day/10;
-//	daySecDig=date->day%10;
-//	monthFirstDig=date->month/10;
-//	monthSecDig=date->month%10;
-//	years=date->year;
-//	sprintf(str, "%d%d/%d%d/%d", dayFirstDig,daySecDig,monthFirstDig,monthSecDig,years);
-//
-//	return str;
-//}
 
 void setDefault(Date* date)
 {
 	date->day=1;
 	date->month=1;
 	date->year=2021;
+	puts("You didn't insert correct date so we inserted a default date");
 }
 void printDate(Date* date)
 {
-	printf("Date: %d/%d/%d", date->day, date->month, date->year);
+	printf("Date: %d/%d/%d \n", date->day, date->month, date->year);
 }
 
 
