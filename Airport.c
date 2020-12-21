@@ -10,9 +10,10 @@ void initAirport(Airport *newAirport) {
 	addAirportState(newAirport);
 	addIATACode(newAirport);
 }
+
 void addAirportName(Airport *newAirport) {
 	puts("Enter The Airport Name:");
-	newAirport->nameAirport = (char*) malloc(MAX_STR*sizeof(char));
+	newAirport->nameAirport = (char*) malloc(MAX_STR * sizeof(char));
 	do {
 		scanf("%[^\n]%*c", newAirport->nameAirport);
 		if (strlen(newAirport->nameAirport) == 0)
@@ -20,13 +21,15 @@ void addAirportName(Airport *newAirport) {
 	} while (strlen(newAirport->nameAirport) == 0);
 	fixNameAirport(newAirport->nameAirport);
 }
+
 void addAirportState(Airport *newAirport) {
 	puts("Enter The Airport State's Name:");
-	newAirport->nameState = (char*) malloc(MAX_STR*sizeof(char));
+	newAirport->nameState = (char*) malloc(MAX_STR * sizeof(char));
 	scanf("%[^\n]%*c", newAirport->nameState);
 }
+
 void addIATACode(Airport *newAirport) {
-	puts("Enter The Airport's IATA Name in 3 uppercase characters exactly:");
+	puts("Enter The Airport's IATA Name in 3 upper case characters exactly:");
 	scanIATACode(newAirport->IATACode);
 }
 
@@ -36,7 +39,7 @@ int isEqualAirports(Airport *pAirport1, Airport *pAirport2) {
 	return 0;
 }
 
-int checkCodeIATAisEqual(Airport *pAirport, char IATA[SIZE]) {
+int checkCodeIATAisEqual(Airport *pAirport, char IATA[IATA_SIZE]) {
 	if (strcmp(pAirport->IATACode, IATA))
 		return 0;
 	return 1;
@@ -70,14 +73,14 @@ void fixNameAirport(char *nameAirport) {
 	}
 	strcpy(nameAirport, textResult);
 }
-void printAirport(Airport *airport) {
-	printf("%s Airport, Located in %s State \n and its IATA is : %s \n",
+
+void printAirport(const Airport *airport) {
+	printf("%s Airport, Located in %s State ,IATA is : %s \n",
 			airport->nameAirport, airport->nameState, airport->IATACode);
 }
 
 void freeAirport(Airport *air) {
 	free(air->nameAirport);
 	free(air->nameState);
-	free(air);
 }
 

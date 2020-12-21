@@ -4,17 +4,15 @@
 #include "Airport.h"
 #include <stdlib.h>
 
-#define STR_MAXSIZE 255
-
 typedef struct {
-	Airport* airportArr;
+	Airport *airportArr;
 	int amountAirport;
-}AirportManager;
+} AirportManager;
 
-void initAirportManager(AirportManager* airportM);
-void userAddAirportToManager(AirportManager* airportM);
-Airport* findAirport(AirportManager* airportM,char* code);
-int addAirportToManager(AirportManager* airportM, Airport* newAirport);
-void printAirportManager(AirportManager* airportM);
-void freeAirportManager(AirportManager* airportM);
+void initAirportManager(AirportManager *airportM);
+void userAddAirportToManager(AirportManager *airportM);
+Airport* findAirport(const AirportManager *airportM, char *code);
+int addAirportToManager(AirportManager *airportM, Airport *newAirport);
+void printAirportManager(const AirportManager *airportM);
+void freeAirportManager(AirportManager *airportM);
 #endif /* AIRPORTMANAGER_H_ */
