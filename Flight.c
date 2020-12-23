@@ -16,7 +16,11 @@ void initFlightCodes(Flight *flight) {
 	scanIATACode(flight->depatureCode);
 	puts("please enter destination IATA code:");
 	flight->destinationCode = (char*) malloc(MAX_STR * sizeof(char));
-	scanIATACode(flight->destinationCode);
+	do{
+		scanIATACode(flight->destinationCode);
+		if(!strcmp(flight->destinationCode, flight->depatureCode))
+			puts("You cannot insert the same value, please insert again:");
+	}while(!strcmp(flight->destinationCode, flight->depatureCode));
 }
 
 void initFlightTimeAndDate(Flight *flight) {

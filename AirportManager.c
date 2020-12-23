@@ -11,6 +11,8 @@ void initAirportManager(AirportManager *airportM) {
 	do {
 		scanf("%d", &airportNum);
 		getchar();
+		if(airportNum < 1)
+			puts("cannot insert a number lower then 1, please insert again:");
 	} while (airportNum < 1);
 	for (int i = 0; i < airportNum; ++i) {
 		userAddAirportToManager(airportM);
@@ -36,7 +38,6 @@ int addAirportToManager(AirportManager *airportM, Airport *newAirport) {
 		*(airportM->airportArr) = *(newAirport);
 		airportM->amountAirport = 1;
 	} else {
-
 		for (int i = 0; i < airportM->amountAirport; ++i) {
 			if ((checkCodeIATAisEqual((airportM->airportArr + i),
 					newAirport->IATACode)))

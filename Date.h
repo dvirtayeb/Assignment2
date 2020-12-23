@@ -9,15 +9,14 @@ typedef struct {
 	int day;
 	int month;
 	int year;
-	char* dateStr;
-}Date;
+	char *dateStr;
+} Date;
 
-void addDate(Date* date);
-char* toString(Date* date, char* str);
+void addDate(Date *date);
 void setDefault(Date *date);
-int userAddDate(Date* date,char* str);
-int checkDigit(Date* date, char* temp, int* counter,int* flag);
-void insertIntegerValues(Date* date, char* temp, int* counter);
-void printDate(Date* date);
+int userAddDate(Date *date, char *str);
+int checkDigit(const char *temp, const int *counter);
+void insertIntegerValues(Date *date, const char *temp, int *counter);
+void printDate(const Date *date);
 
 #endif /* DATE_H_ */

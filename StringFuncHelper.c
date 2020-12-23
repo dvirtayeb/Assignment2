@@ -69,7 +69,7 @@ void scanIATACode(char *code) {
 	int flag = 0;
 	while (!flag) {
 
-		scanf("%[^\n]%*c", code); // Check IATA
+		scanf("%[^\n]%*c", code);
 		flag = checkIfIATACorrect(code);
 		if (!flag)
 			puts("Wrong IATA input, enter exactly 3 UPPERCASE characters");
